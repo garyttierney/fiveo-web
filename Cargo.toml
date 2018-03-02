@@ -1,0 +1,17 @@
+[package]
+name = "fiveo-wasm-target"
+version = "0.1.0"
+authors = ["Gary Tierney <gary.tierney@gmx.com>"]
+
+[dependencies]
+fiveo = { version = "0.1.0", path = "../fiveo" }
+
+[features]
+profiling = []
+
+[lib]
+path = "./src/bindings/ffi/lib.rs"
+crate-type = ["cdylib"]
+
+[profile.release]
+debug = true

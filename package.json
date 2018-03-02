@@ -1,0 +1,35 @@
+{
+  "name": "fiveo-web",
+  "version": "0.1.0",
+  "description": "A fast fuzzy text searching library for the web.",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/garyttierney/fiveo-web.git"
+  },
+  "keywords": [
+    "text",
+    "search",
+    "fuzzy",
+    "search",
+    "webassembly"
+  ],
+  "author": "Gary Tierney <gary.tierney@gmx.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/garyttierney/fiveo-web/issues"
+  },
+  "homepage": "https://github.com/garyttierney/fiveo-web#readme",
+  "devDependencies": {
+    "@types/webassembly-js-api": "0.0.1",
+    "rust-native-wasm-loader": "^0.6.5",
+    "ts-loader": "^4.0.0",
+    "typescript": "^2.7.2",
+    "wasm-loader": "^1.3.0",
+    "webpack": "^4.0.1",
+    "webpack-cli": "^2.0.9"
+  }
+}

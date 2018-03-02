@@ -1,0 +1,11 @@
+[[package]]
+name = "fiveo"
+version = "0.1.0"
+
+[[package]]
+name = "fiveo-wasm-target"
+version = "0.1.0"
+dependencies = [
+ "fiveo 0.1.0",
+]
+
