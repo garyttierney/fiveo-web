@@ -17,5 +17,6 @@ cache:
 deploy:
   provider: npm
   api_key: "$NPM_TOKEN"
+  email: "gary.tierney@gmx.com"
   on:
     tags: true
