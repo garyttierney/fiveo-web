@@ -5,7 +5,16 @@ before_install:
   - curl https://sh.rustup.rs -sSf | sh -s -- --default-toolchain stable -y
   - export PATH="$HOME/.cargo/bin:$PATH"
   - cargo install wasm-gc
+
+script: npm run build
+
 cache:
   cargo: true
   directories:
     - node_modules
+
+deploy:
+  provider: npm
+  api_key: "$NPM_TOKEN"
+  on:
+    tags: true
