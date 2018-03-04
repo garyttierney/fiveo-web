@@ -12,6 +12,9 @@
     "type": "git",
     "url": "git+https://github.com/garyttierney/fiveo-web.git"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "keywords": [
     "fuzzy",
     "search",
