@@ -4,6 +4,7 @@ node_js:
 before_install:
   - curl https://sh.rustup.rs -sSf | sh -s -- --default-toolchain stable -y
   - export PATH="$HOME/.cargo/bin:$PATH"
+  - rustup target add wasm32-unknown-unknown
   - cargo install wasm-gc
 
 script: npm run build
