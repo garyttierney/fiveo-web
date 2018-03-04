@@ -1,7 +1,12 @@
 'use strict';
 
 module.exports = {
-    devtool: 'inline-source-map',
+    devtool: 'source-map',
+    output: {
+        libraryTarget: 'umd',
+        library: 'fiveo',
+        umdNamedDefine: true
+    },
     entry: './src/index.ts',
     module: {
         rules: [
@@ -17,7 +22,8 @@ module.exports = {
                     }, {
                         loader: 'rust-native-wasm-loader',
                         options: {
-                            release: true
+                            release: true,
+                            gc: true
                         }
                     }
                 ]

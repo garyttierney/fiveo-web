@@ -7,5 +7,9 @@
 <div id="wrapper"></div>
 
 <script src="dist/main.js"></script>
+<script type="text/javascript">
+console.log(fiveo);
+var matcher = fiveo.createBlockingMatcher("test1\ntest2\ntest3\ntest4").then(matcher => matcher.search("test")).then(it => console.log(it));
+</script>
 </body>
 </html>
