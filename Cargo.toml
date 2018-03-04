@@ -4,7 +4,7 @@ version = "0.1.0"
 authors = ["Gary Tierney <gary.tierney@gmx.com>"]
 
 [dependencies]
-fiveo = { version = "0.1.0", path = "../fiveo" }
+fiveo = "0.1.0"
 
 [features]
 profiling = []
