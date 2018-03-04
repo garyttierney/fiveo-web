@@ -1,6 +1,9 @@
 [[package]]
 name = "fiveo"
 version = "0.1.0"
+dependencies = [
+ "strsim 0.7.0 (registry+https://github.com/rust-lang/crates.io-index)",
+]
 
 [[package]]
 name = "fiveo-wasm-target"
@@ -9,3 +12,10 @@ dependencies = [
  "fiveo 0.1.0",
 ]
 
+[[package]]
+name = "strsim"
+version = "0.7.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+
+[metadata]
+"checksum strsim 0.7.0 (registry+https://github.com/rust-lang/crates.io-index)" = "bb4f380125926a99e52bc279241539c018323fab05ad6368b56f93d9369ff550"

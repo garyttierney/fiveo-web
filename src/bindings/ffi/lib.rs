@@ -29,7 +29,7 @@ pub extern "C" fn dealloc(ptr: *mut c_void, cap: usize) {
 }
 
 #[no_mangle]
-pub extern "C" fn get_last_error() -> u32 {
+pub extern "C" fn fiveo_last_error() -> u32 {
     unsafe {
         match LAST_ERROR {
             None => 0,
@@ -39,10 +39,10 @@ pub extern "C" fn get_last_error() -> u32 {
 }
 
 #[no_mangle]
-pub extern "C" fn fiveo_matcher_create<'a>(
+pub extern "C" fn fiveo_matcher_create(
     dictionary: *const u8,
     dictionary_len: usize,
-) -> *mut fiveo::Matcher<'a> {
+) -> *mut fiveo::Matcher {
     let input_slice = unsafe { slice::from_raw_parts(dictionary, dictionary_len) };
 
     str::from_utf8(input_slice)

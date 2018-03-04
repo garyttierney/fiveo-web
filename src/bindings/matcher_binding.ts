@@ -1,6 +1,6 @@
 import TextEncoder = TextEncoding.TextEncoder;
 import { Match } from "../index";
-import { FiveoFfi, NullPointer, Pointer } from "./ffi/api";
+import { FiveoFfi, FiveoSuccess, NullPointer, Pointer } from "./ffi/api";
 const encoder = new TextEncoder("utf-8");
 
 /**
@@ -108,7 +108,7 @@ export default class MatcherBinding {
         this.resultBuffer.delete(queryToken);
         this.resultBuffer[queryToken] = new Array<Match>(maxResults);
 
-        const successful = this.api.fiveo_matcher_search(
+        const result = this.api.fiveo_matcher_search(
             this.matcherPtr,
             queryToken,
             queryPtr,
@@ -118,10 +118,10 @@ export default class MatcherBinding {
 
         this.api.dealloc(queryPtr);
 
-        if (successful) {
+        if (result === FiveoSuccess) {
             return this.resultBuffer[queryToken];
         } else {
-            throw new Error(`Search was unsuccessful: ${this.api.fiveo_last_error()}`);
+            throw new Error(`Search was unsuccessful: ${result}`);
         }
     }
 
