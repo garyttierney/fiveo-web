@@ -10,7 +10,7 @@
 
     <script src="dist/main.js"></script>
     <script type="text/javascript">
-        var matcher = fiveo.createBlockingMatcher("test1\n")
+        var matcher = fiveo.createBlockingMatcher(["test1", "test2", "test3"])
             .then(matcher => matcher.search("test1", 10))
             .then(it => console.log(it));
     </script>

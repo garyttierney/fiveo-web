@@ -20,7 +20,7 @@ interface ModuleEnvironment {
      */
     table: WebAssembly.Table;
 
-    handle_search_result(token: number, value: Pointer, valueLength: number, score: number): void;
+    handle_search_result(token: number, index: number, score: number): void;
 
 }
 

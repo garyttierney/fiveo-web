@@ -80,12 +80,10 @@ pub extern "C" fn fiveo_matcher_search(
 
     match search {
         Ok(results) => for result in results {
-            let value = result.value();
             unsafe {
                 handle_search_result(
                     query_token as u32,
-                    value.as_ptr(),
-                    value.len() as u32,
+                    result.index() as u32,
                     result.score(),
                 );
             }
@@ -99,8 +97,7 @@ pub extern "C" fn fiveo_matcher_search(
 extern "C" {
     pub fn handle_search_result(
         token: c_uint,
-        value: *const c_uchar,
-        value_len: c_uint,
+        index: c_uint,
         score: c_float,
     ) -> c_int;
 }
