@@ -7,6 +7,12 @@ const encoder = new TextEncoder("utf-8");
  *  Internal interface to the libfiveo matcher that keeps track of memory references to symbols returned by the FFI.
  */
 export default class MatcherBinding {
+
+    /**
+     * A local index of the strings indexed by the internal matcher to avoid copies to get match results.
+     */
+    private dictionary: string[];
+
     /**
      * Access to the memory buffer used by the WebAssembly module.
      */
@@ -62,15 +68,17 @@ export default class MatcherBinding {
      * @param api The exports of the loaded WebAssembly module as a `FiveoFfi` interface.
      * @param memory The web modules RAM, so we can pass pointers to the C API.
      */
-    public bind(dictionary: string, api: FiveoFfi, memory: WebAssembly.Memory) {
+    public bind(dictionary: string[], api: FiveoFfi, memory: WebAssembly.Memory) {
         if (this.matcherPtr !== NullPointer) {
             throw new Error("Already initialized a matcher on this binding.");
         }
 
         this.api = api;
         this.memory = memory;
+        this.dictionary = dictionary;
 
-        const dictionaryBuffer = this.textEncoder.encode(dictionary);
+        const dictionaryString = dictionary.join("\n");
+        const dictionaryBuffer = this.textEncoder.encode(dictionaryString);
         const dictionaryBufferLen = dictionaryBuffer.byteLength;
         const dictionaryPtr = this.api.alloc(dictionaryBufferLen);
         const dictionaryPtrBuffer = new Uint8Array(this.memory.buffer, dictionaryPtr, dictionaryBufferLen);
@@ -139,13 +147,10 @@ export default class MatcherBinding {
      * @param {string} encoded The UTF-8 encoded string value of the match.
      * @param {number} score The score of the match.
      */
-    private handleResult(token: number, encoded: Pointer, encodedLen: number, score: number) {
-        const valueBuffer = new Uint8Array(this.memory.buffer, encoded, encodedLen);
-        const text = this.textDecoder.decode(valueBuffer);
-
+    private handleResult(token: number, entryIndex: number, score: number) {
         this.resultBuffer[token].push({
             score,
-            text,
+            text: this.dictionary[entryIndex],
         });
     }
 }

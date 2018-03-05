@@ -35,7 +35,7 @@ export default class MatcherBindingFactory {
      * @param dictionary A new-line delimited list of dictionary entries to be indexed by the created matcher.
      * @param userOptions An optional dictionary of options to configure the loaded module {@see MatcherBinding}.
      */
-    public static create(dictionary: string, userOptions: any | MatcherBindingOptions = {}): Promise<MatcherBinding> {
+    public static create(dictionary: string[], userOptions: any | MatcherBindingOptions = {}): Promise<MatcherBinding> {
         const defaultOptions = {
             initialMemoryPages: 10,
             maxMemoryPages: 100,

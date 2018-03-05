@@ -14,11 +14,7 @@ export {
     Match,
 };
 
-export function createBlockingMatcher(input: string | string[], options?: MatcherBindingOptions): Promise<Matcher> {
-    if (input instanceof Array) {
-        input = input.join("\n");
-    }
-
+export function createBlockingMatcher(input: string[], options?: MatcherBindingOptions): Promise<Matcher> {
     return MatcherBindingFactory.create(input, options)
         .then((binding: MatcherBinding) => new BlockingMatcher(binding));
 }
