@@ -1,7 +1,6 @@
 import TextEncoder = TextEncoding.TextEncoder;
 import { Match } from "../index";
 import { FiveoFfi, FiveoSuccess, NullPointer, Pointer } from "./ffi/api";
-const encoder = new TextEncoder("utf-8");
 
 /**
  *  Internal interface to the libfiveo matcher that keeps track of memory references to symbols returned by the FFI.
@@ -29,11 +28,6 @@ export default class MatcherBinding {
     private matcherPtr: Pointer = NullPointer;
 
     /**
-     * The decoder used to decode input text from UTF-8
-     */
-    private textDecoder: TextEncoding.TextDecoder;
-
-    /**
      * The encoder used to encode input text to UTF-8.
      */
     private textEncoder: TextEncoding.TextEncoder;
@@ -51,13 +45,11 @@ export default class MatcherBinding {
     /**
      * Construct a new {@link MatcherBinding} with the given encoders.
      *
-     * @param {TextEncoding.TextDecoder} textDecoder
-     * @param {TextEncoding.TextEncoder} textEncoder
+     * @param {TextEncoding.TextEncoder} textEncoder An optional string encoder used on multi-byte strings.
      * @param resultBuffer A mapping of search tokens to a list of results.  This is a reference to the Map populated
      * by the `handle_search_result` callback.
      */
-    constructor(textDecoder: TextEncoding.TextDecoder, textEncoder: TextEncoding.TextEncoder) {
-        this.textDecoder = textDecoder;
+    constructor(textEncoder?: TextEncoding.TextEncoder) {
         this.textEncoder = textEncoder;
     }
 
@@ -78,7 +70,7 @@ export default class MatcherBinding {
         this.dictionary = dictionary;
 
         const dictionaryString = dictionary.join("\n");
-        const dictionaryBuffer = this.textEncoder.encode(dictionaryString);
+        const dictionaryBuffer = this.encode(dictionaryString);
         const dictionaryBufferLen = dictionaryBuffer.byteLength;
         const dictionaryPtr = this.api.alloc(dictionaryBufferLen);
         const dictionaryPtrBuffer = new Uint8Array(this.memory.buffer, dictionaryPtr, dictionaryBufferLen);
@@ -104,7 +96,7 @@ export default class MatcherBinding {
     public search(query: string, maxResults: number) {
         const moduleBuffer = new Uint8Array(this.memory.buffer);
         const queryToken = 0;
-        const queryBuffer = this.textEncoder.encode(query);
+        const queryBuffer = this.encode(query);
         const queryPtr = this.api.alloc(queryBuffer.byteLength);
 
         if (queryPtr === NullPointer) {
@@ -152,5 +144,23 @@ export default class MatcherBinding {
             score,
             text: this.dictionary[entryIndex],
         });
+    }
+
+    private encode(input: string): Uint8Array {
+        if (/[\u0080-\uffff]/.test(input)) {
+            if (this.textEncoder === null) {
+                throw new Error("Multi-byte input found and no text encoder available.");
+            }
+
+            return this.textEncoder.encode(input);
+        } else {
+            const buffer = new Uint8Array(input.length);
+
+            for (let idx = 0; idx < input.length; idx++) {
+                buffer[idx] = input.charCodeAt(idx);
+            }
+
+            return buffer;
+        }
     }
 }

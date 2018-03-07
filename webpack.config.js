@@ -5,7 +5,9 @@ module.exports = {
     output: {
         libraryTarget: 'umd',
         library: 'fiveo',
-        umdNamedDefine: true
+        umdNamedDefine: true,
+        globalObject: 'typeof self !== \'undefined\' ? self : this',
+    },
     },
     entry: './src/index.ts',
     module: {

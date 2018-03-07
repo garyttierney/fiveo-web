@@ -39,11 +39,18 @@ export default class MatcherBindingFactory {
         const defaultOptions = {
             initialMemoryPages: 10,
             maxMemoryPages: 100,
+            utf8: false,
         };
 
         const settings: MatcherBindingOptions = Object.assign({}, defaultOptions, userOptions);
+        const encodingSpecSupported = typeof TextEncoder !== "undefined";
+
+        if (settings.utf8 && !encodingSpecSupported) {
+            throw new Error("TextEncoding specification is unsupported and utf-8 was required");
+        }
+
         const resultMap = new Map<number, any>();
-        const bindings = new MatcherBinding(new TextDecoder("utf-8"), new TextEncoder("utf-8"));
+        const bindings = new MatcherBinding(encodingSpecSupported ? new TextEncoder("utf-8") : null);
         const moduleEnvironment: ModuleEnvironment = {
             handle_search_result: bindings.createHandlerCallback(),
             memory: new WebAssembly.Memory({ initial: settings.initialMemoryPages, maximum: settings.maxMemoryPages }),

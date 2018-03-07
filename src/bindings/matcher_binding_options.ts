@@ -11,4 +11,9 @@ export default interface MatcherBindingOptions {
      * The maximum number of memory pages that should be allocated for this module (multiples of 64KiB).
      */
     maxMemoryPages: number;
+
+    /**
+     * A flag indicating whether UTF-8 encoding is required.
+     */
+    utf8: boolean;
 }
