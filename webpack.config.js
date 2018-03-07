@@ -8,9 +8,14 @@ module.exports = {
         umdNamedDefine: true,
         globalObject: 'typeof self !== \'undefined\' ? self : this',
     },
+    entry: {
+        main: './src/index.ts',
+        english_dictionary_bench_suite: './bench_suite/english_dictionary_bench_suite.ts'
     },
-    entry: './src/index.ts',
     module: {
+        noParse: [
+            /^benchmark$/,
+        ],
         rules: [
             {
                 test: /\.ts$/,
