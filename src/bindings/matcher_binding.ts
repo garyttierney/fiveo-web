@@ -114,7 +114,7 @@ export default class MatcherBinding {
         moduleBuffer.set(queryBuffer, queryPtr);
 
         this.resultBuffer.delete(queryToken);
-        this.resultBuffer[queryToken] = new Array<Match>(maxResults);
+        this.resultBuffer[queryToken] = new Array<Match>();
 
         const result = this.api.fiveo_matcher_search(
             this.matcherPtr,
