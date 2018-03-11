@@ -1,28 +1,43 @@
-extern crate fiveo;
+// We aren't using the standard library.
+#![no_std]
 
-use std::mem;
-use std::ptr;
-use std::os::raw::c_uchar;
-use std::os::raw::c_int;
-use std::os::raw::c_uint;
-use std::os::raw::c_float;
-use std::os::raw::c_void;
-use std::slice;
-use std::str;
+// Required to replace the global allocator.
+#![feature(global_allocator)]
+
+// Required to use the `alloc` crate and its types, the `abort` intrinsic, and a
+// custom panic handler.
+#![feature(alloc, core_intrinsics, lang_items)]
+
+extern crate alloc;
+extern crate fiveo;
+extern crate wee_alloc;
+
+// Use `wee_alloc` as the global allocator.
+#[global_allocator]
+static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
+
+use alloc::boxed::Box;
+use alloc::Vec;
+
+use core::mem;
+use core::ptr;
+use core::slice;
+use core::str;
+
 
 static mut LAST_ERROR: Option<u32> = None;
 
 #[no_mangle]
-pub extern "C" fn alloc(size: usize) -> *mut c_void {
+pub extern "C" fn alloc(size: usize) -> *mut isize {
     let mut buf = Vec::with_capacity(size);
     let ptr = buf.as_mut_ptr();
     mem::forget(buf);
 
-    ptr as *mut c_void
+    ptr as *mut isize
 }
 
 #[no_mangle]
-pub extern "C" fn dealloc(ptr: *mut c_void, cap: usize) {
+pub extern "C" fn dealloc(ptr: *mut isize, cap: usize) {
     unsafe {
         let _buf = Vec::from_raw_parts(ptr, 0, cap);
     }
@@ -50,7 +65,7 @@ pub extern "C" fn fiveo_matcher_create(
         .and_then(|val| fiveo::Matcher::new(val))
         .map(|matcher| Box::into_raw(Box::new(matcher)))
         .unwrap_or_else(|err| {
-            let error_code = std::convert::From::from(err);
+            let error_code = core::convert::From::from(err);
             unsafe {
                 LAST_ERROR = Some(error_code);
             };
@@ -66,7 +81,7 @@ pub extern "C" fn fiveo_matcher_search(
     query: *const u8,
     query_len: usize,
     max_results: usize,
-) -> c_uint {
+) -> u32 {
     let (matcher, query_slice) = unsafe {
         let query_slice = slice::from_raw_parts(query, query_len);
         let matcher = &*matcher;
@@ -88,7 +103,7 @@ pub extern "C" fn fiveo_matcher_search(
                 );
             }
         },
-        Err(err) => return std::convert::From::from(err)
+        Err(err) => return core::convert::From::from(err)
     }
 
     0
@@ -96,8 +111,8 @@ pub extern "C" fn fiveo_matcher_search(
 
 extern "C" {
     pub fn handle_search_result(
-        token: c_uint,
-        index: c_uint,
-        score: c_float,
-    ) -> c_int;
+        token: u32,
+        index: u32,
+        score: f32,
+    ) -> i32;
 }
