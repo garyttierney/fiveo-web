@@ -4,8 +4,12 @@ version = "0.2.1"
 authors = ["Gary Tierney <gary.tierney@gmx.com>"]
 
 [dependencies]
-fiveo = "0.2.0"
 wee_alloc = "0.2.0"
+rlibc = "1.0.0"
+
+[dependencies.fiveo]
+version = "0.3.0"
+features = ["webassembly"]
 
 [features]
 profiling = []
