@@ -19,10 +19,6 @@ An example using React can be found [here](https://codesandbox.io/s/3q84085j36) 
 * [WebAssembly](https://caniuse.com/#feat=wasm)<sup>1</sup>
 * [TextEncoding](https://caniuse.com/#feat=textencoder)<sup>2</sup>
 
-1: Recent versions of node.js supporting WebAssembly should also be able to use this library, although it hasn't been tested.
-
-2: It may be possible to provide a shim for the TextEncoding specification on platforms lacking an implementation.
-
 ## Installation
  
  The package can be installed via npm:
@@ -55,6 +51,27 @@ const results = await matcher.search(query, maxResults);
 
 After cloning the git repository and installing dependencies via `npm install`, a webpack build can be ran with `npm run build`.  This will output TypeScript declaration files and transpiled code to `dist/`.
 
+## Benchmarks
+
+`fiveo-web` ships with a single benchmark that indexes a subset of an English dictionary.  It can be ran by building the benchmark with webpack:
+
+```shell
+> $ npx webpack
+```
+
+Then running it from the shell or including the resulting script on a web page:
+```shell
+> $ node dist/english_dictionary_bench_suite
+english_word_list (310k entries) x 703 ops/sec ±0.00% (1 run sampled)
+english_word_list (310k entries) x 769 ops/sec ±7.82% (2 runs sampled)
+english_word_list (310k entries) x 789 ops/sec ±13.53% (3 runs sampled)
+english_word_list (310k entries) x 824 ops/sec ±10.13% (4 runs sampled)
+english_word_list (310k entries) x 820 ops/sec ±9.22% (5 runs sampled)
+english_word_list (310k entries) x 772 ops/sec ±7.92% (6 runs sampled)
+english_word_list (310k entries) x 811 ops/sec ±6.39% (7 runs sampled)
+english_word_list (310k entries) x 808 ops/sec ±5.65% (8 runs sampled)
+english_word_list (310k entries) x 766 ops/sec ±5.04% (9 runs sampled)
+```
 ## Contributing
 
 Contributions via GitHub are welcome.  Please follow the standard [conventional changelog](https://github.com/conventional-changelog/conventional-changelog) commit format.
