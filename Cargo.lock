@@ -10,14 +10,14 @@ dependencies = [
 
 [[package]]
 name = "fiveo"
-version = "0.3.0"
+version = "0.3.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 
 [[package]]
 name = "fiveo-wasm-target"
-version = "0.3.0"
+version = "0.3.1"
 dependencies = [
- "fiveo 0.3.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "fiveo 0.3.1 (registry+https://github.com/rust-lang/crates.io-index)",
  "rlibc 1.0.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "wee_alloc 0.2.0 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
@@ -117,7 +117,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 
 [metadata]
 "checksum errno 0.2.3 (registry+https://github.com/rust-lang/crates.io-index)" = "b2c858c42ac0b88532f48fca88b0ed947cad4f1f64d904bcd6c9f138f7b95d70"
-"checksum fiveo 0.3.0 (registry+https://github.com/rust-lang/crates.io-index)" = "aaa9d272e352da6196c117461abca0256e7201230dc438a51eea98a4d25bb6f6"
+"checksum fiveo 0.3.1 (registry+https://github.com/rust-lang/crates.io-index)" = "a687cb5518e8e9961d8e285e55d3c27251939915230fe1000dc60ecfb17c6a72"
 "checksum kernel32-sys 0.2.2 (registry+https://github.com/rust-lang/crates.io-index)" = "7507624b29483431c0ba2d82aece8ca6cdba9382bff4ddd0f7490560c056098d"
 "checksum libc 0.2.39 (registry+https://github.com/rust-lang/crates.io-index)" = "f54263ad99207254cf58b5f701ecb432c717445ea2ee8af387334bdd1a03fdff"
 "checksum memory_units 0.4.0 (registry+https://github.com/rust-lang/crates.io-index)" = "8452105ba047068f40ff7093dd1d9da90898e63dd61736462e9cdda6a90ad3c3"
