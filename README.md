@@ -2,11 +2,9 @@
 
 A fuzzy text searching library for the modern web built with [TypeScript](https://www.typescriptlang.org/) and [Rust](https://www.rust-lang.org).
 
-![Travis](https://img.shields.io/travis/garyttierney/fiveo-web.svg)
-
-![npm](https://img.shields.io/npm/v/fiveo-web.svg)
-
-![license](https://img.shields.io/github/license/garyttierney/fiveo-web.svg)
+[![Travis](https://img.shields.io/travis/garyttierney/fiveo-web.svg)](https://travis-ci.org/garyttierney/fiveo-web)
+[![npm](https://img.shields.io/npm/v/fiveo-web.svg)](https://npmjs.com/fiveo-web)
+[![license](https://img.shields.io/github/license/garyttierney/fiveo-web.svg)](LICENSE)
 
 ## Introduction
 
