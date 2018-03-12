@@ -2,7 +2,7 @@ language: node_js
 node_js:
   - "8"
 before_install:
-  - curl https://sh.rustup.rs -sSf | sh -s -- --default-toolchain stable -y
+  - curl https://sh.rustup.rs -sSf | sh -s -- --default-toolchain nightly -y
   - export PATH="$HOME/.cargo/bin:$PATH"
   - rustup target add wasm32-unknown-unknown
   - cargo install wasm-gc
