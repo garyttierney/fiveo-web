@@ -4,11 +4,14 @@ version = "0.3.1"
 authors = ["Gary Tierney <gary.tierney@gmx.com>"]
 
 [dependencies]
-wee_alloc = "0.2.0"
 rlibc = "1.0.0"
 
+[dependencies.wee_alloc]
+version = "0.2.0"
+features = ["size_classes"]
+
 [dependencies.fiveo]
-version = "0.3.1"
+version = "0.3.2"
 features = ["webassembly"]
 
 [features]
