@@ -1,6 +1,6 @@
 {
   "name": "fiveo-web",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "A fast fuzzy text searching library for the web.",
   "main": "./dist/main.js",
   "types": "./dist/src/index.d.ts",

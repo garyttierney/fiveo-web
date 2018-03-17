@@ -1,6 +1,6 @@
 [package]
 name = "fiveo-wasm-target"
-version = "0.3.1"
+version = "0.3.2"
 authors = ["Gary Tierney <gary.tierney@gmx.com>"]
 
 [dependencies]

@@ -15,7 +15,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 
 [[package]]
 name = "fiveo-wasm-target"
-version = "0.3.1"
+version = "0.3.2"
 dependencies = [
  "fiveo 0.3.2 (registry+https://github.com/rust-lang/crates.io-index)",
  "rlibc 1.0.0 (registry+https://github.com/rust-lang/crates.io-index)",
