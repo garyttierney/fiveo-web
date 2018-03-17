@@ -141,6 +141,7 @@ export default class MatcherBinding {
      */
     private handleResult(token: number, entryIndex: number, score: number) {
         this.resultBuffer[token].push({
+            index: entryIndex,
             score,
             text: this.dictionary[entryIndex],
         });
