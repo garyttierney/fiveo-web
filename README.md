@@ -5,6 +5,7 @@ A fuzzy text searching library for the modern web built with [TypeScript](https:
 [![Travis](https://img.shields.io/travis/garyttierney/fiveo-web.svg)](https://travis-ci.org/garyttierney/fiveo-web)
 [![npm](https://img.shields.io/npm/v/fiveo-web.svg)](https://npmjs.com/fiveo-web)
 [![license](https://img.shields.io/github/license/garyttierney/fiveo-web.svg)](LICENSE)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fgaryttierney%2Ffiveo-web.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fgaryttierney%2Ffiveo-web?ref=badge_shield)
 
 ## Introduction
 
@@ -79,3 +80,5 @@ Contributions via GitHub are welcome.  Please follow the standard [conventional 
 ## Licensing
 
 `fiveo-web` is licensed under the ISC license.  Please see the `LICENSE` file for more information.
+
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fgaryttierney%2Ffiveo-web.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fgaryttierney%2Ffiveo-web?ref=badge_large)
